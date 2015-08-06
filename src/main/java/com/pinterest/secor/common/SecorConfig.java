@@ -275,4 +275,8 @@ public class SecorConfig {
     private String[] getStringArray(String name) {
         return mProperties.getStringArray(name);
     }
+
+    public String getMessageInputAvroSchema() {
+        return getString("message.input.avro.schema");
+    }
 }

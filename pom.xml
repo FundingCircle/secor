@@ -210,6 +210,11 @@
             <artifactId>java-statsd-client</artifactId>
             <version>3.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>1.7.7</version>
+        </dependency>
     </dependencies>
 
     <build>
