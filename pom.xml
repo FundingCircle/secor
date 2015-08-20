@@ -73,6 +73,10 @@
             <id>Typesafe public Maven repo</id>
             <url>http://repo.typesafe.com/typesafe/releases</url>
         </repository>
+        <repository>
+            <id>confluent</id>
+            <url>http://packages.confluent.io/maven/</url>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
@@ -219,6 +223,11 @@
             <groupId>org.apache.avro</groupId>
             <artifactId>avro-mapred</artifactId>
             <version>1.7.7</version>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-schema-registry-client</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 

@@ -279,4 +279,8 @@ public class SecorConfig {
     public String getMessageInputAvroSchema() {
         return getString("message.input.avro.schema");
     }
+
+    public String getConfluentSchemaRegistryURL() {
+        return getString("message.input.avro.confluent.schema.registry.url");
+    }
 }
