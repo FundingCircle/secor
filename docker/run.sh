@@ -25,7 +25,7 @@ fi
 ### NOTE : Using exec because if a monitor (supervisord or envconsul) tries to kill this script
 ###        the signal won't be passed onto the java process(which runs in a subshell).
 ###        By using exec, we avoid the java process running in a subshell.
-exec java -ea -Dsecor.kafka.group=${SECOR_GROUP} \
+exec java -Xms512m -Xmx512m -ea -Dsecor.kafka.group=${SECOR_GROUP} \
      -Daws.access.key=${AWS_ACCESS_KEY} \
      -Daws.secret.key=${AWS_SECRET_KEY} \
      -Dzookeeper.quorum=${ZK_QUORUM} \
