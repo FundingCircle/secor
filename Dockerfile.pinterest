@@ -4,7 +4,7 @@ MAINTAINER fundingcircle "engineering@fundingcircle.com"
 
 # This environment variable is used here and in the /opt/secor/run.sh script
 # It should be updated to build images for new versions
-ENV SECOR_VERSION 0.4
+ENV SECOR_VERSION 0.5
 
 RUN apk update \
         && apk add openssl \
