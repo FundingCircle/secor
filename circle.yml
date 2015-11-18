@@ -7,34 +7,22 @@ machine:
   java:
     version: oraclejdk8
   environment:
-    PATH: $PATH:$HOME/.s3cmd
-    SECOR_LOCAL_S3: true
-    S3CMD: 1.0.1
     QUAY_EMAIL: engineering@fundingcircle.com
-
-
-dependencies:
-  pre:
-    - wget https://github.com/s3tools/s3cmd/archive/v$S3CMD.tar.gz -O /tmp/s3cmd.tar.gz
-    - tar -xzf /tmp/s3cmd.tar.gz -C $HOME
-    - mv $HOME/s3cmd-$S3CMD $HOME/.s3cmd
-    - cd $HOME/.s3cmd && python setup.py install --user && cd -
-    - gem install fakes3 -v 0.1.7
-
 
 test:
   override:
-    - make unit
-    - make build
-## For some reason, the integration tests don't work on circleci
-## They work on secor's official travis ci.
-## TODO: Make integration tests work on CircleCI
-####   - make integration
+    - ./conditional-build.sh
 
 deployment:
-  dev:
+  features:
+    branch: /^(?!master$).*/ 
+    commands:
+      - docker login -u $QUAY_ROBOT_USERNAME -p $QUAY_ROBOT_PASSWORD  -e $QUAY_EMAIL quay.io
+      - docker build -f Dockerfile -t quay.io/fundingcircle/secor:$CIRCLE_BRANCH .
+      - docker push quay.io/fundingcircle/secor:$CIRCLE_BRANCH
+  production:
     branch: master 
     commands:
       - docker login -u $QUAY_ROBOT_USERNAME -p $QUAY_ROBOT_PASSWORD  -e $QUAY_EMAIL quay.io
-      - docker build -t quay.io/fundingcircle/secor:dev .
-      - docker push quay.io/fundingcircle/secor:dev
+      - docker build -f Dockerfile.pinterest -t quay.io/fundingcircle/secor:latest .
+      - docker push quay.io/fundingcircle/secor:latest

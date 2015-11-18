@@ -2,7 +2,7 @@
 
 if [ -z ${SECOR_VERSION} ]; then
     printf "This script is meant to be run from within a Docker image\n \
-            where the SECOR_VERSION environment variable has been set or isn't empty.\n"
+            where the SECOR_VERSION environment variable has been set (in Dockerfile) or isn't empty.\n"
     exit 1
 fi
 

@@ -4,12 +4,15 @@ MAINTAINER fundingcircle "engineering@fundingcircle.com"
 
 # This environment variable is used here and in the /opt/secor/run.sh script
 # It should be updated to build images for new versions
-ENV SECOR_VERSION 0.5-SNAPSHOT
+ENV SECOR_VERSION 0.4
 
-COPY ./target/secor-$SECOR_VERSION-bin.tar.gz  /tmp/
-RUN mkdir -p /opt/secor \
-        && tar -zxvf /tmp/secor-$SECOR_VERSION-bin.tar.gz -C /opt/secor \
-        && rm -rf /tmp/secor-$SECOR_VERSION-bin.tar.gz
+RUN apk update \
+        && apk add openssl \
+        && wget -O secor.tgz https://repo1.maven.org/maven2/com/pinterest/secor/$SECOR_VERSION/secor-$SECOR_VERSION-bin.tar.gz  \
+        && mkdir -p /opt/secor \
+        && tar -C /opt/secor -zxvf secor.tgz \
+        && rm secor.tgz 
+
 COPY ./docker/run.sh /opt/secor/run.sh
 
 WORKDIR /opt/secor
