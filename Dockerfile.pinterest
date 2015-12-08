@@ -1,4 +1,4 @@
-FROM quay.io/fundingcircle/alpine-java:latest
+FROM v1.quay.io/fundingcircle/alpine-java:latest
 
 MAINTAINER fundingcircle "engineering@fundingcircle.com" 
 
