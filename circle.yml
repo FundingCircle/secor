@@ -17,13 +17,13 @@ deployment:
   features:
     branch: /^(?!master$).*/ 
     commands:
-      - docker login -u $QUAY_ROBOT_USERNAME -p $QUAY_ROBOT_PASSWORD  -e $QUAY_EMAIL quay.io
-      - docker build -f Dockerfile -t quay.io/fundingcircle/secor:$CIRCLE_BRANCH .
-      - docker push quay.io/fundingcircle/secor:$CIRCLE_BRANCH
+      - docker login -u $QUAY_ROBOT_USERNAME -p $QUAY_ROBOT_PASSWORD  -e $QUAY_EMAIL v1.quay.io
+      - docker build -f Dockerfile -t v1.quay.io/fundingcircle/secor:$CIRCLE_BRANCH .
+      - docker push v1.quay.io/fundingcircle/secor:$CIRCLE_BRANCH
   production:
     branch: master 
     commands:
-      - docker login -u $QUAY_ROBOT_USERNAME -p $QUAY_ROBOT_PASSWORD  -e $QUAY_EMAIL quay.io
-      - docker build -f Dockerfile.pinterest -t quay.io/fundingcircle/secor:latest .
-      - docker push quay.io/fundingcircle/secor:latest
+      - docker login -u $QUAY_ROBOT_USERNAME -p $QUAY_ROBOT_PASSWORD  -e $QUAY_EMAIL v1.quay.io
+      - docker build -f Dockerfile.pinterest -t v1.quay.io/fundingcircle/secor:latest .
+      - docker push v1.quay.io/fundingcircle/secor:latest
       - ./tag-latest-with-version.sh
