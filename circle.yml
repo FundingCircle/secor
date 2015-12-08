@@ -24,5 +24,6 @@ deployment:
     branch: master 
     commands:
       - docker login -u $QUAY_ROBOT_USERNAME -p $QUAY_ROBOT_PASSWORD  -e $QUAY_EMAIL quay.io
-      - docker build -f Dockerfile.pinterest -t quay.io/fundingcircle/secor:dev .
-      - docker push quay.io/fundingcircle/secor:dev
+      - docker build -f Dockerfile.pinterest -t quay.io/fundingcircle/secor:latest .
+      - docker push quay.io/fundingcircle/secor:latest
+      - ./tag-latest-with-version.sh
