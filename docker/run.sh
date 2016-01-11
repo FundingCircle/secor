@@ -8,8 +8,6 @@ fi
 
 
 if [ -z ${SECOR_GROUP+x} ] ||
-       [ -z ${AWS_ACCESS_KEY+x} ] ||
-       [ -z ${AWS_SECRET_KEY+x} ] ||
        [ -z ${ZK_QUORUM+x} ] ||
        [ -z ${SEED_BROKER_HOST+x} ] ||
        [ -z ${SEED_BROKER_PORT+x} ] ||
