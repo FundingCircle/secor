@@ -36,6 +36,7 @@ exec java -Xms512m -Xmx512m -ea -Dsecor.kafka.group=${SECOR_GROUP} \
      -Dsecor.kafka.topic_filter=${TOPIC_FILTER} \
      -Dsecor.max.file.size.bytes=${MAX_FILE_SIZE} \
      -Dsecor.max.file.age.seconds=${MAX_FILE_AGE} \
+     -Dsecor.file.reader.writer.factory=com.pinterest.secor.io.impl.MessagePackSequenceFileReaderWriterFactory \
      -Dlog4j.configuration=log4j.prod.properties \
      -Dconfig=secor.prod.backup.properties \
      -cp /opt/secor/secor-${SECOR_VERSION}.jar:/opt/secor/lib/* \

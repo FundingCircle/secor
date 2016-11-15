@@ -1,10 +1,10 @@
-FROM v1.quay.io/fundingcircle/alpine-java:latest
+FROM quay.io/fundingcircle/alpine-java:latest
 
-MAINTAINER fundingcircle "engineering@fundingcircle.com" 
+MAINTAINER fundingcircle "engineering@fundingcircle.com"
 
 # This environment variable is used here and in the /opt/secor/run.sh script
 # It should be updated to build images for new versions
-ENV SECOR_VERSION 0.6-SNAPSHOT
+ENV SECOR_VERSION 0.23-SNAPSHOT
 
 COPY ./target/secor-$SECOR_VERSION-bin.tar.gz  /tmp/
 RUN mkdir -p /opt/secor \
