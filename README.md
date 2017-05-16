@@ -156,9 +156,17 @@ Secor is distributed under [Apache License, Version 2.0](http://www.apache.org/l
   * [Leo Woessner](https://github.com/estezz)
   * [Jerome Gagnon](https://github.com/jgagnon1)
   * [Taichi Nakashima](https://github.com/tcnksm)
+<<<<<<< fbadd6f5af0649a8f855ccbe873314bd5bf0125c
   * [Lovenish Goyal] (https://github.com/lovenishgoyal)
   * [Ahsan Nabi Dar] (https://github.com/ahsandar)
   * [Ashish Kumar] (https://github.com/ashubhumca)
+=======
+  * [Lovenish Goyal](https://github.com/lovenishgoyal)
+  * [Ahsan Nabi Dar](https://github.com/ahsandar)
+  * [Ashish Kumar](https://github.com/ashubhumca)
+  * [Ashwin Sinha](https://github.com/tygrash)
+
+>>>>>>> Upgraded kafka version with new tag
 
 ## Companies who use Secor
 
@@ -175,6 +183,7 @@ Secor is distributed under [Apache License, Version 2.0](http://www.apache.org/l
   * [Rakuten](http://techblog.rakuten.co.jp/)
   * [Appsflyer](https://www.appsflyer.com)
   * [Wego](https://www.wego.com)
+  * [GO_JEK](http://gojekengineering.com/)
 
 ## Help
 
