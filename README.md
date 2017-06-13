@@ -13,7 +13,7 @@ Secor is a service persisting [Kafka] logs to [Amazon S3], [Google Cloud Storage
   - **configurable upload policies**: commit points controlling when data is persisted in S3 are configured through size-based and time-based policies (e.g., upload data when local buffer reaches size of 100MB and at least once per hour),
   - **monitoring**: metrics tracking various performance properties are exposed through [Ostrich] and optionally exported to [OpenTSDB] / [statsD],
   - **customizability**: external log message parser may be loaded by updating the configuration,
-  - **event transformation**: external message level tranformation can be done by using customized class.
+  - **event transformation**: external message level transformation can be done by using customized class.
   - **Qubole interface**: Secor connects to [Qubole] to add finalized output partitions to Hive tables.
 
 ## Setup Guide
@@ -47,7 +47,11 @@ cd ${SECOR_INSTALL_DIR}
 ##### Run Secor
 ```sh
 cd ${SECOR_INSTALL_DIR}
-java -ea -Dsecor_group=secor_backup -Dlog4j.configuration=log4j.prod.properties -Dconfig=secor.prod.backup.properties -cp secor-0.1-SNAPSHOT.jar:lib/* com.pinterest.secor.main.ConsumerMain
+java -ea -Dsecor_group=secor_backup \
+  -Dlog4j.configuration=log4j.prod.properties \
+  -Dconfig=secor.prod.backup.properties \
+  -cp secor-0.1-SNAPSHOT.jar:lib/* \
+  com.pinterest.secor.main.ConsumerMain
 ```
 
 ## Output grouping
@@ -86,7 +90,12 @@ Currently secor supports the following output formats
 
 - **Delimited Text Files**: A new line delimited raw text file. To use this format, set `secor.file.reader.writer.factory=com.pinterest.secor.io.impl.DelimitedTextFileReaderWriterFactory` option.
 
+- **ORC Files**: Optimized row columnar format. To use this format, set 
+`secor.file.reader.writer.factory=com.pinterest.secor.io.impl.JsonORCFileReaderWriterFactory` option. Additionally, ORC schema must be specified per topic like this `secor.orc.message.schema.<topic>=<orc schema>`. If all Kafka topics receive same format data then this option can be used `secor.orc.message.schema.*=<orc schema>`. User can implement custom ORC schema provider by implementing ORCScehmaProvider interface and the new provider class should be specified using option `secor.orc.schema.provider=<orc schema provider class name>`. By default this property is DefaultORCSchemaProvider.
+
 - **[Parquet] Files (for Protobuf messages)**: Columnar storage format. To use this output format, set `secor.file.reader.writer.factory=com.pinterest.secor.io.impl.ProtobufParquetFileReaderWriterFactory` option. In addition, Protobuf message class per Kafka topic must be defined using option `secor.protobuf.message.class.<topic>=<protobuf class name>`. If all Kafka topics transfer the same protobuf message type, set `secor.protobuf.message.class.*=<protobuf class name>`.
+
+- **[Parquet] Files (for Thrift messages)**: Columnar storage format. To use this output format, set `secor.file.reader.writer.factory=com.pinterest.secor.io.impl.ThriftParquetFileReaderWriterFactory` option. In addition, thrift message class per Kafka topic must be defined using option `secor.thrift.message.class.<topic>=<thrift class name>`. If all Kafka topics transfer the same thrift message type, set `secor.thrift.message.class.*=<thrift class name>`. It is asumed all messages use the same thrift protocol. Thrift protocol is set in `secor.thrift.protocol.class`.
 
 - **Gzip upload format**:  To enable compression on uploaded files to the cloud, in `secor.common.properties` set `secor.compression.codec` to a valid compression codec implementing  `org.apache.hadoop.io.compress.CompressionCodec` interface, such as `org.apache.hadoop.io.compress.GzipCodec`.
 
@@ -147,8 +156,10 @@ Secor is distributed under [Apache License, Version 2.0](http://www.apache.org/l
   * [Leo Woessner](https://github.com/estezz)
   * [Jerome Gagnon](https://github.com/jgagnon1)
   * [Taichi Nakashima](https://github.com/tcnksm)
-  * [Lovenish Goyal] (https://github.com/lovenishgoyal)
-  * [Ahsan Nabi Dar] (https://github.com/ahsandar)
+  * [Lovenish Goyal](https://github.com/lovenishgoyal)
+  * [Ahsan Nabi Dar](https://github.com/ahsandar)
+  * [Ashish Kumar](https://github.com/ashubhumca)
+  * [Ashwin Sinha](https://github.com/tygrash)
 
 ## Companies who use Secor
 
@@ -164,7 +175,8 @@ Secor is distributed under [Apache License, Version 2.0](http://www.apache.org/l
   * [Zalando](http://www.zalando.com)
   * [Rakuten](http://techblog.rakuten.co.jp/)
   * [Appsflyer](https://www.appsflyer.com)
-  * [Wego] (http://www.wego.com)
+  * [Wego](https://www.wego.com)
+  * [GO-JEK](http://gojekengineering.com/)
 
 ## Help
 

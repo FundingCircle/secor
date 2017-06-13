@@ -4,7 +4,7 @@ MAINTAINER fundingcircle "engineering@fundingcircle.com"
 
 # This environment variable is used here and in the /opt/secor/run.sh script
 # It should be updated to build images for new versions
-ENV SECOR_VERSION 0.23-SNAPSHOT
+ENV SECOR_VERSION 0.24-SNAPSHOT
 
 COPY ./target/secor-$SECOR_VERSION-bin.tar.gz  /tmp/
 RUN mkdir -p /opt/secor \
